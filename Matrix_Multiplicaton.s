@@ -69,6 +69,29 @@ addi s11, zero, 1  ##program start
 ## INSERT YOUR OWN CODE HERE!
 ## Do not change the code above!
 
+for1:
+    for2:
+        for3:
+
+            #O[b][k] += I[b][c] * W[c][k]
+
+            #
+
+
+        addi tp, tp, 1
+        blt s7, tp, for3
+
+    addi t0, t0, 1
+    blt s8, t0, for2
+
+addi a1, a1, 1
+blt s9, a1, for1
+
+
+
+
+
+
 
 
 
