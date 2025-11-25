@@ -78,8 +78,8 @@ addi s11, zero, 1  ##program start
 # free registers: a2, a3, a4, a5, a6, a7, s2, s3, s10, t3, t4, t5
 # a2 : adress I[b][c]
 # a3 : adress W[c][k]
-# a4 : 
-# a5 : 
+# a4 :
+# a5 :
 # a6 : 
 # a7 : 
 # s2 : 
@@ -110,7 +110,7 @@ for1:
             # moving pointer
             add sp, a2, zero
 
-            add t3, 0(sp) #Good?
+            lw t3, 0(sp) #Good?
 
             # Adress of W[c][k]
             mul a3, s7, t0 # (row_index * number_of_columns)
@@ -120,7 +120,7 @@ for1:
             # moving pointer
             add sp, a3, zero
 
-            add t4, 0(sp) #Good?
+            lw t4, 0(sp) #Good?
 
             # Mul + Add --> temp
             mul t5, t3, t4
