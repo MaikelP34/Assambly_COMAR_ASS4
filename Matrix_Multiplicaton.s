@@ -69,23 +69,76 @@ addi s11, zero, 1  ##program start
 ## INSERT YOUR OWN CODE HERE!
 ## Do not change the code above!
 
+#inladen Matrix I in stack
+
+#int I[4][5]; int W[5][3]; int O[4][3];
+#I: .word 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 # horizontaal opgeslagen
+#W: .word 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 # verticaal opgeslagen
+
+# free registers: a2, a3, a4, a5, a6, a7, s2, s3, s10, t3, t4, t5
+# a2 : adress I[b][c]
+# a3 : adress W[c][k]
+# a4 : 
+# a5 : 
+# a6 : 
+# a7 : 
+# s2 : 
+# s3 : 
+# s10 : 
+# t3 : mul input 1
+# t4 : mul input 2
+# t5 : mul result
+
+# formula for adress in matrix based on Colomns and Rows: 
+# adress = ((row_index * number_of_columns) + column_index) * 4 --> relative to base adress
+
+addi sp, s4, 0 # Stack pointer at I[0][0]
+
+#TODO variables to 0 for safety?
+
 for1:
+
     for2:
+    
         for3:
 
-            #O[b][k] += I[b][c] * W[c][k]
+            # Adress of I[b][c]
+            mul a2, s9, tp # (row_index * number_of_columns)
+            add a2, a2, s7 # ((row_index * number_of_columns) + column_index)
+            sll a2, a2, t6 # ((row_index * number_of_columns) + column_index) * 4
 
-            #
+            # moving pointer
+            add sp, a2, zero
 
+            add t3, 0(sp) #Good?
 
-        addi tp, tp, 1
+            # Adress of W[c][k]
+            mul a3, s7, t0 # (row_index * number_of_columns)
+            add a3, a3, s8 # ((row_index * number_of_columns) + column_index)
+            sll a3, a3, t6 # ((row_index * number_of_columns) + column_index) * 4
+
+            # moving pointer
+            add sp, a3, zero
+
+            add t4, 0(sp) #Good?
+
+            # Mul + Add --> temp
+            mul t5, t3, t4
+            add a0, a0, t5
+             
+        addi s7, s7, 1
         blt s7, tp, for3
 
-    addi t0, t0, 1
+    addi s8, s8, 1
     blt s8, t0, for2
 
-addi a1, a1, 1
+addi s9, s9, 1
 blt s9, a1, for1
+
+#ecall to end program
+addi a7, zero, 10
+ecall
+
 
 
 
