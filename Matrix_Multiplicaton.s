@@ -1,6 +1,9 @@
 .data
 
 v: .word
+I: .word 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 # 4x5 matrix
+W: .word 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1       # 5x3 matrix
+O: .space 48  # 4x3 matrix output space (4*3)
 
 .text
 
@@ -96,44 +99,56 @@ addi sp, s4, 0 # Stack pointer at I[0][0]
 
 #TODO variables to 0 for safety?
 
-for1:
+for1:                        # Loop over rows b = 0..3 (s9 = b)
+    addi s8, zero, 0        # reset k index for each row (s8 = 0)
 
-    for2:
-    
-        for3:
+    for2:                        # Loop over columns k = 0..2 (s8 = k)
+        addi a0, zero, 0        # accumulator = 0 for new output O[b][k]
+        addi s7, zero, 0        # reset c index (s7 = 0)
 
-            # Adress of I[b][c]
-            mul a2, s9, tp # (row_index * number_of_columns)
-            add a2, a2, s7 # ((row_index * number_of_columns) + column_index)
-            sll a2, a2, t6 # ((row_index * number_of_columns) + column_index) * 4
+        for3:                        # Loop over c = 0..4 (multiply-accumulate)
+            # Address of I[b][c]
+            mul   a2, s9, tp        # a2 = b * 5
+            add   a2, a2, s7        # a2 = b*5 + c
+            sll   a2, a2, t6        # a2 = (b*5 + c) * 4
+            add   a2, a2, s4        # a2 = address of I[b][c]
+            lw    t3, 0(a2)         # t3 = I[b][c]
 
-            # moving pointer
-            add sp, a2, zero
+            # Address of W[c][k]
+            mul   a3, s7, t0        # a3 = c * 3
+            add   a3, a3, s8        # a3 = c*3 + k
+            sll   a3, a3, t6        # a3 = (c*3 + k) * 4
+            add   a3, a3, s5        # a3 = address of W[c][k]
+            lw    t4, 0(a3)         # t4 = W[c][k]
 
-            lw t3, 0(sp) #Good?
+            # multiply-accumulate
+            mul   t5, t3, t4
+            add   a0, a0, t5
 
-            # Adress of W[c][k]
-            mul a3, s7, t0 # (row_index * number_of_columns)
-            add a3, a3, s8 # ((row_index * number_of_columns) + column_index)
-            sll a3, a3, t6 # ((row_index * number_of_columns) + column_index) * 4
+    addi  s7, s7, 1         # c++
+    blt   s7, tp, for3      # if c < 5 loop
 
-            # moving pointer
-            add sp, a3, zero
+    # store result O[b][k]
+    mul   a4, s9, t0        # a4 = b * 3    (output has 3 columns)
+    add   a4, a4, s8        # a4 = b*3 + k
+    sll   a4, a4, t6        # a4 = (b*3 + k) * 4
+    add   a4, a4, s6        # a4 = address of O[b][k]
+    sw    a0, 0(a4)         # O[b][k] = accumulator
 
-            lw t4, 0(sp) #Good?
+    # prepare for next k
+    addi  a0, zero, 0       # clear accumulator
+    addi  s7, zero, 0       # clear c index (defensive)
+    addi  s8, s8, 1         # k++
+    blt   s8, t0, for2      # if k < 3 loop over k
 
-            # Mul + Add --> temp
-            mul t5, t3, t4
-            add a0, a0, t5
-             
-        addi s7, s7, 1
-        blt s7, tp, for3
+# next row
+addi  s9, s9, 1         # b++
+blt   s9, a1, for1      # if b < 4 loop over b
 
-    addi s8, s8, 1
-    blt s8, t0, for2
 
-addi s9, s9, 1
-blt s9, a1, for1
+# Done - results are stored in O
+# Matrix O is at the label 'O' in memory
+# You can inspect memory at the O label to see all 12 result values
 
 #ecall to end program
 addi a7, zero, 10
