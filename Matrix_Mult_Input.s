@@ -1,49 +1,71 @@
 .data
 
 v: .word
-I: .word 19,2,3,43,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 # 4x5 matrix
-W: .word 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1       # 5x3 matrix
+W: .word 15,14,131,12,11,10,9,8,7,6,5,4,3,2,1       # 5x3 matrix
+I: .word 11,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 # 4x5 matrix
 O: .space 48  # 4x3 matrix output space (4*3)
 
 .text
 
 ##this instruction can be left out for our hardware version!
-la t1, v #not needed for our RISC-V
+la s5, v #not needed for our RISC-V
 
 ###this section starts by filling the I and W matrices. 
-la a1, I
-addi a2, sp, 0 #begin van stack
+la a2, I
+addi sp, s5, 0
+addi a3, sp, 0 #begin van stack
 addi ra, zero, 0
 addi t0, zero, 20
 addi t1, zero, 15
 addi t2, zero, 2
+addi t5, zero, 5
+addi t6, zero, 3
 
-sll t3, t0, t2
-add sp, sp, t1
-# loop
-loop_m1:
-    add a1, a1, ra
-    add sp, sp, ra
-    lw t3, 0(a1)
-    sw t3, 0(sp)
-    addi ra, ra, 4
-    bne ra, t4, loop_m1
+sll t4, t0, t2
+
+la a4, W #adress W
+addi ra, zero, 0 #index i
+sll t4, t0, t2 #length array 1 *4
+add a5, a2, t4
+sll t4, t1, t2 #length array 2 *4
+
+sll t6, t6, t2
+addi t3, t5, -1
+mul s2, t6, t3
+sll t5, t5, t2
+
+addi s1, zero, 0 #index j
 
 
-loop_m2:
-    sll sp, ra, t6  #i ==> word address 'SSLI does not exist'
-    addi ra, ra, 1 # i = i+1   
-    sub s0, t0, t2  
-    addi t2, t2, 1 # j = j+1      
-### you can leave out the following two lines in the hardware version, 
-##and replace it with following single line, as t1 is not used for us!
-## sw s0, 0(sp)     
-    add gp, sp, t1 #address in memory
-    sw s0, 0(gp)
-    bne t0, t2, loop_m2  #return to loop m2
+loop_m2_col:
+    add sp, s5, s6
+    addi ra, zero, 0 #index i
+    loop_m2_2:
+        lw t3, 0(sp)
+        sw t3, 0(a5)
+        add sp, sp, t6
+        addi a5, a5, 4
+        addi ra, ra, 4
+        bne ra, t5, loop_m2_2
+    addi s6, s6, 4
+
+    bne s6, t6, loop_m2_col
+
+
 
 addi s1, s1, 0
 addi a0, a0, 1
+
+# loop
+#loop_m1:
+#    lw t3, 0(a1)
+#    sw t3, 0(sp)
+#    addi a1, a1, 4
+#    addi sp, sp, 4
+#    addi ra, ra, 4
+#    bne ra, t4, loop_m1
+
+
 
 ##matrix multiply
 ## set all registers!
@@ -60,9 +82,9 @@ addi s9, zero, 0  ## B loop index starts with 0
 addi a0, zero, 0  ## acc result
 
 ####### we don't need to have the next three lines in our HW version!!
-add s4, s4, t1
-add s5, s5, t1
-add s6, s6, t1
+add s4, s4, a1
+add s5, s5, a1
+add s6, s6, a1
 
 
 #### Program starts!! 
@@ -116,11 +138,11 @@ for1:                        # Loop over rows b = 0..3 (s9 = b)
             add   a5, a4, s4        # a2 = address of I[b][c]
             lw    t3, 0(a5)         # t3 = I[b][c]
 
-            # Address of W[c][k]
-            mul   a4, s7, t0        # a3 = c * 3
-            add   a5, a4, s8        # a3 = c*3 + k
-            sll   a6, a5, t6        # a3 = (c*3 + k) * 4
-            add   a7, a6, s5        # a3 = address of W[c][k]
+            # Address of W[c][k] - COLUMN-MAJOR storage
+            mul   a4, s8, t5        # a4 = k * 5 (5 rows in W)
+            add   a5, a4, s7        # a5 = k*5 + c
+            sll   a6, a5, t6        # a6 = (k*5 + c) * 4
+            add   a7, a6, s5        # a7 = address of W[c][k]
             lw    t4, 0(a7)         # t4 = W[c][k]
 
             # multiply-accumulate
