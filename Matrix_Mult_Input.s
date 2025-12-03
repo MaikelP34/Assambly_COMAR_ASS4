@@ -1,7 +1,7 @@
 .data
 
 v: .word
-I: .word 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 # 4x5 matrix
+I: .word 19,2,3,43,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 # 4x5 matrix
 W: .word 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1       # 5x3 matrix
 O: .space 48  # 4x3 matrix output space (4*3)
 
@@ -11,24 +11,25 @@ O: .space 48  # 4x3 matrix output space (4*3)
 la t1, v #not needed for our RISC-V
 
 ###this section starts by filling the I and W matrices. 
-addi ra, zero, 0  # i = 0
-addi tp, zero, 20 #matrix 1 ==> 20 elements
-addi t0, zero, 15 #matrix 2 ==> 15 elements
-addi t6, zero, 2 #shift for word address
+la a1, I
+addi a2, sp, 0 #begin van stack
+addi ra, zero, 0
+addi t0, zero, 20
+addi t1, zero, 15
+addi t2, zero, 2
 
+sll t3, t0, t2
+add sp, sp, t1
 # loop
 loop_m1:
-    sll sp, ra, t6  #i ==> word address 'SSLI does not exist'
-    addi ra, ra, 1 # i = i+1    
-### you can leave out the following two lines in the hardware version, 
-##and replace it with following single line, as t1 is not used for us!
-## sw ra, 0(sp)     
-    add gp, sp, t1 #address in memory
-    sw ra, 0(gp)
-    bne tp, ra, loop_m1
+    add a1, a1, ra
+    add sp, sp, ra
+    lw t3, 0(a1)
+    sw t3, 0(sp)
+    addi ra, ra, 4
+    bne ra, t4, loop_m1
 
 
-addi t2, zero, 0 #j
 loop_m2:
     sll sp, ra, t6  #i ==> word address 'SSLI does not exist'
     addi ra, ra, 1 # i = i+1   
@@ -156,4 +157,4 @@ addi a0, zero, 10
 ecall
 
 #######  STOP COUNTING CYCLES 
-addi s11, zero, 0  #indication of program end!  
+addi s11, zero, 0  #indication of program end!
