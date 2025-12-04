@@ -1,19 +1,19 @@
 .data
-
+#Matrix O = Matrix I * Matrix W
 v: .word
 W: .word 15,14,131,12,11,10,9,8,7,6,5,4,3,2,1       # 5x3 matrix
 I: .word 11,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 # 4x5 matrix
 O: .space 48  # 4x3 matrix output space (4*3)
 
 .text
-
+#TODO mult terug maken
 ##this instruction can be left out for our hardware version!
 la s5, v #not needed for our RISC-V
 
 ###this section starts by filling the I and W matrices. 
 la a2, I
 addi sp, s5, 0
-addi a3, sp, 0 #begin van stack
+addi a4, sp, 0 #begin van stack
 addi ra, zero, 0
 addi t0, zero, 20
 addi t1, zero, 15
@@ -23,7 +23,7 @@ addi t6, zero, 3
 
 sll t4, t0, t2
 
-la a4, W #adress W
+la a3, W #adress W
 addi ra, zero, 0 #index i
 sll t4, t0, t2 #length array 1 *4
 add a5, a2, t4
@@ -51,25 +51,12 @@ loop_m2_col:
 
     bne s6, t6, loop_m2_col
 
-
-
 addi s1, s1, 0
 addi a0, a0, 1
 
-# loop
-#loop_m1:
-#    lw t3, 0(a1)
-#    sw t3, 0(sp)
-#    addi a1, a1, 4
-#    addi sp, sp, 4
-#    addi ra, ra, 4
-#    bne ra, t4, loop_m1
-
-
-
 ##matrix multiply
 ## set all registers!
-
+addi a3, a5, 0
 addi s4, zero, 0  # I input address starting point
 addi s5, zero, 80 # W input address starting point
 addi s6, zero, 140 # output address starting point
@@ -80,6 +67,7 @@ addi s7, zero, 0  ## C loop index starts with 0
 addi s8, zero, 0  ## K loop index starts with 0
 addi s9, zero, 0  ## B loop index starts with 0
 addi a0, zero, 0  ## acc result
+addi t5, zero, 0
 
 ####### we don't need to have the next three lines in our HW version!!
 add s4, s4, a1
@@ -119,7 +107,7 @@ addi s11, zero, 1  ##program start
 # formula for adress in matrix based on Colomns and Rows: 
 # adress = ((row_index * number_of_columns) + column_index) * 4 --> relative to base adress
 
-addi sp, s4, 0 # Stack pointer at I[0][0]
+addi sp, s5, 0 # Stack pointer at I[0][0]
 
 #TODO variables to 0 for safety?
 
@@ -134,14 +122,14 @@ for1:                        # Loop over rows b = 0..3 (s9 = b)
             # Address of I[b][c]
             mul   a2, s9, tp        # a2 = b * 5
             add   a3, a2, s7        # a2 = b*5 + c
-            sll   a4, a3, t6        # a2 = (b*5 + c) * 4
+            sll   a4, a3, t2        # a2 = (b*5 + c) * 4
             add   a5, a4, s4        # a2 = address of I[b][c]
             lw    t3, 0(a5)         # t3 = I[b][c]
 
             # Address of W[c][k] - COLUMN-MAJOR storage
             mul   a4, s8, t5        # a4 = k * 5 (5 rows in W)
             add   a5, a4, s7        # a5 = k*5 + c
-            sll   a6, a5, t6        # a6 = (k*5 + c) * 4
+            sll   a6, a5, t2        # a6 = (k*5 + c) * 4
             add   a7, a6, s5        # a7 = address of W[c][k]
             lw    t4, 0(a7)         # t4 = W[c][k]
 
