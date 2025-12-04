@@ -68,6 +68,8 @@ addi s8, zero, 0  ## K loop index starts with 0
 addi s9, zero, 0  ## B loop index starts with 0
 addi a0, zero, 0  ## acc result
 addi t5, zero, 0
+addi a4, zero, 0
+addi t3, zero, 0
 
 ####### we don't need to have the next three lines in our HW version!!
 add s4, s4, a1
@@ -162,9 +164,9 @@ blt   s9, a1, for1      # if b < 4 loop over b
 # Matrix O is at the label 'O' in memory
 # You can inspect memory at the O label to see all 12 result values
 
+#######  STOP COUNTING CYCLES 
+addi s11, zero, 0  #indication of program end!
+
 #ecall to end program
 addi a0, zero, 10
 ecall
-
-#######  STOP COUNTING CYCLES 
-addi s11, zero, 0  #indication of program end!
