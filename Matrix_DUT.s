@@ -8,41 +8,45 @@ O: .space 48  # 4x3 matrix output space (4*3)
 .text
 #TODO mult terug maken
 ##this instruction can be left out for our hardware version!
-la s10, v #not needed for our RISC-V
-la a0, W #adress W
-la a1, I #adress I
+la s5, v #not needed for our RISC-V
 
 ###this section starts by filling the I and W matrices. 
+la a2, I
+addi sp, s5, 0
+addi a4, sp, 0 #begin van stack
+addi ra, zero, 0
+addi t0, zero, 20
+addi t1, zero, 15
+addi t2, zero, 2
+addi t5, zero, 5
+addi t6, zero, 3
 
-addi sp, s10, 0 #start stack in mem
 
-addi s2, zero, 20 #length I
-addi s3, zero, 15 #length W
+la a3, W #adress W
+addi ra, zero, 0 #index i
+sll t4, t0, t2 #length array 1 *4
+add a5, a2, t4
 
-addi s4, zero, 5 #rows W
-addi s5, zero, 3 #collums W
+sll t6, t6, t2
+sll t5, t5, t2
 
-addi t2, zero, 2 #cnst 2
+addi s1, zero, 0 #index j
 
 
-sll t3, s2, t2 #length * 4
-add a4, a1, t3 #eind adress I
-
-sll t4, s5, t2 #aantal collums *4
-sll t5, s4, t2 #aantal rows *4
-
-mem_loop:
-    add sp, s10, s6 #sp adress + index i
-    addi s7, zero, 0 #reset index j
-    mini_loop:
-        lw t3, 0(sp) #laad eerste matrix waarde in
-        sw t3, 0(a4) #sla op
-        add sp, sp, t4 #stack +4
-        addi a4, a4, 4
-        addi s7, s7, 4
-        bne t5, s7, mini_loop
+loop_m2_col:
+    add sp, s5, s6
+    addi ra, zero, 0 #index i
+    loop_m2_2:
+        lw t3, 0(sp)
+        sw t3, 0(a5)
+        add sp, sp, t6
+        addi a5, a5, 4
+        addi ra, ra, 4
+        bne ra, t5, loop_m2_2
     addi s6, s6, 4
-    bne t4, s6, mem_loop
+
+    bne s6, t6, loop_m2_col
+
 
 
 ##matrix multiply
