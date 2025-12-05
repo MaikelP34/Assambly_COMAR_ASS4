@@ -112,7 +112,7 @@ for1:                        # Loop over rows b = 0..3 (s9 = b)
             mul   a2, s9, tp        # a2 = b * 5
             add   a3, a2, s7        # a2 = b*5 + c
             sll   a4, a3, t6        # a2 = (b*5 + c) * 4
-            add   a5, a4, s4        # a2 = address of I[b][c]
+            add   a5, a4, s4        # a2 = address of  [b][c]
             lw    t3, 0(a5)         # t3 = I[b][c]
 
             # Address of W[c][k]
