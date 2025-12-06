@@ -1,20 +1,18 @@
 .data
 #Matrix O = Matrix I * Matrix W
-v: .word
 W: .word 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1       # 5x3 matrix
 I: .word 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 # 4x5 matrix
-O: .space 48  # 4x3 matrix output space (4*3)
 
 .text
 #TODO mult terug maken
 ##this instruction can be left out for our hardware version!
-la s10, v #not needed for our RISC-V
+
 la a0, W #adress W
 la a1, I #adress I
 
 ###this section starts by filling the I and W matrices. 
 
-addi sp, s10, 0 #start stack in mem
+addi sp,a0, 0 #start stack in mem
 
 addi s2, zero, 20 #length I
 addi s3, zero, 15 #length W
@@ -33,7 +31,7 @@ sll t4, s5, t2 #aantal collums *4
 sll t5, s4, t2 #aantal rows *4
 
 mem_loop:
-    add sp, s10, s6 #sp adress + index i
+    add sp, a0, s6 #sp adress + index i
     addi s7, zero, 0 #reset index j
     mini_loop:
         lw t3, 0(sp) #laad eerste matrix waarde in
@@ -93,31 +91,29 @@ mul a5,t4,t5 #size w
 la s6, I
 addi s7, a2,0
 addi a6,t5,0 #a6=t5
-srli a5,a5,2# /2
+srli a5,a5,2 # /4
 addi s1,a5,0
 add a6,a6,s6 # eindaddres i loop
 add a5,a5,s7 #eindaddres w loop
+forforloop:
+lw s9,0(a4)  #tussenresultaat inladen
 forloop:
-    lw t0,0(s6) #i
-    lw t1,0(s7) #W
-    mul s8,t0,t1 #result mul
-    lw s9,0(a4) #tussenresultaat inladen
-    add s9,s9,s8 #tussenres+mul result
-    sw s9,0(a4)
-    addi s6,s6,4#index i +4
+    lw t0,0(s6)  #i
+    lw t1,0(s7)  #W
+    addi s6,s6,4 #index i +4
+    mul s8,t0,t1 #result mul   
     addi s7,s7,4 #index w +4
-    bne a6,s6,forloop#zolang niet door 1 rij I loopen(t5=4*widthI)
+    add s9,s9,s8 #tussenres+mul result
+    bne a6,s6,forloop #zolang niet door 1 rij I loopen(t5=4*widthI)
     ##else
+    sw s9,0(a4)
     addi a4,a4,4
-    sub s6,s6,t5#index i to start
-    bne s7,a5,forloop #zolang w< size w loop
-    sub s7,s7,s1#reset w
-    add s6,s6,t5#index i to end
-    sll s8,s4,t2 #lengte I
-    add a6,a6,s8 # eindaddres i loop
-    bne s6,a2, forloop
-exit:
-#ecall to end program
-addi a0, zero, 10
-ecall
+    sub s6,s6,t5 #index i to start
+    bne s7,a5,forforloop #zolang w< size w loop
+    
+    add s6,s6,t5 #index i to end
+    sub s7,s7,s1 #reset w
+    add a6,a6,t5 # eindaddres i loop
+    bne s6,a2, forforloop
+
 
