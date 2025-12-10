@@ -37,8 +37,8 @@ mem_loop:
     addi s7, zero, 0 #reset index j
     mini_loop:
         lw t3, 0(sp) #laad eerste matrix waarde in
-        sw t3, 0(a4) #sla op
         add sp, sp, t4 #stack +4
+        sw t3, 0(a4) #sla op
         addi a4, a4, 4
         addi s7, s7, 4
         bne t5, s7, mini_loop
