@@ -35,8 +35,8 @@ mem_loop:
     addi s7, zero, 0 #reset index j
     mini_loop:
         lw t3, 0(sp) #laad eerste matrix waarde in
-        add sp, sp, t4 #stack +4
         sw t3, 0(a4) #sla op
+        add sp, sp, t4 #stack +4
         addi a4, a4, 4
         addi s7, s7, 4
         bne t5, s7, mini_loop
@@ -91,16 +91,17 @@ mul a5,t4,t5 #size w
 la s6, I
 addi s7, a2,0
 addi a6,t5,0 #a6=t5
-srli a5,a5,2 # /4
+srl a5,a5,t2 # /4
 addi s1,a5,0
 add a6,a6,s6 # eindaddres i loop
 add a5,a5,s7 #eindaddres w loop
 forforloop:
 lw s9,0(a4)  #tussenresultaat inladen
+
 forloop:
     lw t0,0(s6)  #i
-    addi s6,s6,4 #index i +4
     lw t1,0(s7)  #W
+    addi s6,s6,4 #index i +4
     mul s8,t0,t1 #result mul   
     addi s7,s7,4 #index w +4
     add s9,s9,s8 #tussenres+mul result
@@ -115,3 +116,11 @@ forloop:
     sub s7,s7,s1 #reset w
     add a6,a6,t5 # eindaddres i loop
     bne s6,a2, forforloop
+
+
+
+exit:
+addi zero,zero,0
+j exit
+
+
