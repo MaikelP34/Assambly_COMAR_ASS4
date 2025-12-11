@@ -1,4 +1,4 @@
-addi sp,zero,0
+addi zero,zero,0
 addi t1,zero,15
 sw t1,0(sp) #15
 addi sp,sp,4
