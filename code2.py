@@ -42,7 +42,7 @@ def load_hex_instructions(filename):
 
 
 hex_instr = load_hex_instructions("instructions.txt")
-asm_instr = load_assembly_lines("mult_tb.s")
+asm_instr = load_assembly_lines("mult_vivado.s")
 
 if len(hex_instr) != len(asm_instr):
     print("WARNING: hex count != asm instruction count!")

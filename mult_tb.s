@@ -1,9 +1,112 @@
-.data
-W: .word 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1       # values
-
-.text
+addi zero,zero,0
+addi t1,zero,15
+sw t1,0(sp) #15
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #14
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #13
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #12
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #11
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #10
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #9
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #8
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #7
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #6
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #5
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #4
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #3
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #2
+addi sp,sp,4
+addi t1,t1,-1
+sw t1,0(sp) #1
+addi sp,sp,4#I inladen op 60
+addi t1,zero,1
+sw t1,0(sp) #1
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #2
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #3
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #4
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #5
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #6
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #7
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #8
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #9
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #10
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #11
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #12
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #13
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #14
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #15
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #16
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #17
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #18
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #19
+addi sp,sp,4
+addi t1,t1,1
+sw t1,0(sp) #20
+addi sp,sp,4
+addi t1,t1,1
 #test som en load address
-la s2, W
+li s2, 0
 addi s3, s2, 0
 addi s2, s2, 4 #0(s2) = 14
 addi t6, zero, 2 #rekenwaarde
