@@ -1,4 +1,7 @@
+.data
+W: .word 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1       # values
 
+.text
 #test som en load address
 la s2, W
 addi s3, s2, 0
@@ -13,10 +16,10 @@ lw t3, 4(s3) #14
 
 #test shift logic
 sll t1, t1, t6 #56
-srl t2, a5, t6 # /4 -> 3
+srl t2, t2, t6 # /4 -> 3
 
 #test sub
-sub t1, t1, t2 #56-12 = 44
+sub t1, t1, t2 #56-3 = 53
 
 #test lw + sw
 lw t4, 0(s2) #14
@@ -30,4 +33,4 @@ testloop:
     mul s3, t5, t6 #[8,6,4,2,0]
     bne t5, zero, testloop
 
-addi s3, zero, 2005
+addi
