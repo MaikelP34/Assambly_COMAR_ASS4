@@ -143,15 +143,17 @@ mem_loop:
         addi s6, s6, 4
     bne t4, s6, mem_loop
 
+#begin mult
 
 mul a5,t4,t5 #size w
-li s6, 60
-addi s7, a2,0
+li s6, 60 #begin I
+addi s7, a2,0 #begin w'
 addi a6,t5,0 #a6=t5
 srl a5,a5,t2 # /4
-addi s1,a5,0
+addi s1,a5,0 #grootte array (niet bytes)
 add a6,a6,s6 # eindaddres i loop
 add a5,a5,s7 #eindaddres w loop
+
 forforloop:
 addi s9,zero,0
 
@@ -164,21 +166,16 @@ forloop:
     add s9,s9,s8 #tussenres+mul result
     bne a6,s6,forloop #zolang niet door 1 rij I loopen(t5=4*widthI)
     ##else
-    addi a4,a4,4
-    sw s9,0(a4)
+    addi a4,a4,4 #volgend adress opslaan
+    sw s9,0(a4) #result opslaan
     sub s6,s6,t5 #index i to start
     bne s7,a5,forforloop #zolang w< size w loop
     
     add s6,s6,t5 #index i to end
     sub s7,s7,s1 #reset w
     add a6,a6,t5 # eindaddres i loop
-    bne s6,a2, forforloop
-
-
+    bne s6,a2, forforloop #zolang index i =! 
 
 exit:
 addi zero,zero,0
 j exit
-
-
-
