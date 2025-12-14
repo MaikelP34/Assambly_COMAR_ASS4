@@ -160,6 +160,7 @@ addi s9,zero,0
 forloop:
     lw t0,0(s6)  #i
     lw t1,0(s7)  #W
+    addi zero,zero,0
     addi s6,s6,4 #index i +4
     mul s8,t0,t1 #result mul   
     addi s7,s7,4 #index w +4
