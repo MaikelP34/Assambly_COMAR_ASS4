@@ -42,7 +42,7 @@ def load_hex_instructions(filename):
 
 
 hex_instr = load_hex_instructions("instructions.txt")
-asm_instr = load_assembly_lines("no_memloop.s")
+asm_instr = load_assembly_lines("mult_vivado_unrolled.s")
 
 if len(hex_instr) != len(asm_instr):
     print("WARNING: hex count != asm instruction count!")

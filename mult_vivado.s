@@ -43,7 +43,7 @@ sw t1,0(sp) #2
 addi sp,sp,4
 addi t1,t1,-1
 sw t1,0(sp) #1
-addi sp,sp,4#I inladen op 60
+addi sp,sp,4 #I inladen op 60
 addi t1,zero,1
 sw t1,0(sp) #1
 addi sp,sp,4
@@ -155,18 +155,21 @@ add a6,a6,s6 # eindaddres i loop
 add a5,a5,s7 #eindaddres w loop
 
 forforloop:
-addi s9,zero,0
+addi s9, zero, 0
+addi s8, zero, 0
 
 forloop:
     lw t0,0(s6)  #i
     lw t1,0(s7)  #W
-    addi zero,zero,0
+    add s9,s9,s8 #tussenres+mul result
     addi s6,s6,4 #index i +4
+
     mul s8,t0,t1 #result mul   
     addi s7,s7,4 #index w +4
-    add s9,s9,s8 #tussenres+mul result
+
     bne a6,s6,forloop #zolang niet door 1 rij I loopen(t5=4*widthI)
     ##else
+    add s9,s9,s8 #tussenres+mul result
     addi a4,a4,4 #volgend adress opslaan
     sw s9,0(a4) #result opslaan
     sub s6,s6,t5 #index i to start
@@ -176,6 +179,7 @@ forloop:
     sub s7,s7,s1 #reset w
     add a6,a6,t5 # eindaddres i loop
     bne s6,a2, forforloop #zolang index i =! 
+
 
 exit:
 addi zero,zero,0
