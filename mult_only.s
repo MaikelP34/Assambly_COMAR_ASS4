@@ -108,7 +108,7 @@ forloop:
 
     mul s8,t0,t1 #result mul
     addi s7,s7,4 #index w +4
-    addi zero, zero, 0
+    
     bne a6,s6,forloop #zolang niet door 1 rij I loopen(t5=4*widthI)
     ##else
 
@@ -131,5 +131,3 @@ forloop:
 exit:
 addi zero,zero,0
 j exit
-
-

@@ -262,7 +262,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 
 #-----------------------
 lw t0,0(s6)  #i
@@ -272,7 +272,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 
 #-----------------------
 lw t0,0(s6)  #i
@@ -282,7 +282,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -291,7 +291,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -300,7 +300,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
@@ -317,7 +317,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -326,7 +326,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -335,7 +335,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -344,7 +344,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -353,7 +353,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
@@ -370,7 +370,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -379,7 +379,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -388,7 +388,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -397,7 +397,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -406,171 +406,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
-#//////////////////////
-add s9,s9,s8 #tussenres+mul result
-addi a4,a4,4 #volgend adress opslaan
-sw s9,0(a4) #result opslaan
-sub s6,s6,t5 #index i to start
-addi s9, zero, 0
-addi s8, zero, 0
-
-#######################
-add s6,s6,t5 #index i to end
-sub s7,s7,s1 #reset w
-add a6,a6,t5 # eindaddres i loop
-
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#//////////////////////
-add s9,s9,s8 #tussenres+mul result
-addi a4,a4,4 #volgend adress opslaan
-sw s9,0(a4) #result opslaan
-sub s6,s6,t5 #index i to start
-addi s9, zero, 0
-addi s8, zero, 0
-
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#//////////////////////
-add s9,s9,s8 #tussenres+mul result
-addi a4,a4,4 #volgend adress opslaan
-sw s9,0(a4) #result opslaan
-sub s6,s6,t5 #index i to start
-addi s9, zero, 0
-addi s8, zero, 0
-
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
-#-----------------------
-lw t0,0(s6)  #i
-lw t1,0(s7)  #W
-add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
-
-mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
@@ -592,7 +428,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -601,7 +437,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -610,7 +446,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -619,7 +455,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -628,7 +464,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
@@ -645,7 +481,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -654,7 +490,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -663,7 +499,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -672,7 +508,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -681,7 +517,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
@@ -698,7 +534,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -707,7 +543,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -716,7 +552,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -725,7 +561,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -734,7 +570,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
@@ -756,7 +592,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -765,7 +601,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -774,7 +610,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -783,7 +619,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -792,7 +628,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
@@ -809,7 +645,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -818,7 +654,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -827,7 +663,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -836,7 +672,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -845,7 +681,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
@@ -862,7 +698,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -871,7 +707,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -880,7 +716,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -889,7 +725,7 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
 #-----------------------
 lw t0,0(s6)  #i
 lw t1,0(s7)  #W
@@ -898,7 +734,171 @@ addi s6,s6,4 #index i +4
 
 mul s8,t0,t1 #result mul
 addi s7,s7,4 #index w +4
- 
+addi zero, zero, 0
+#//////////////////////
+add s9,s9,s8 #tussenres+mul result
+addi a4,a4,4 #volgend adress opslaan
+sw s9,0(a4) #result opslaan
+sub s6,s6,t5 #index i to start
+addi s9, zero, 0
+addi s8, zero, 0
+
+#######################
+add s6,s6,t5 #index i to end
+sub s7,s7,s1 #reset w
+add a6,a6,t5 # eindaddres i loop
+
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#//////////////////////
+add s9,s9,s8 #tussenres+mul result
+addi a4,a4,4 #volgend adress opslaan
+sw s9,0(a4) #result opslaan
+sub s6,s6,t5 #index i to start
+addi s9, zero, 0
+addi s8, zero, 0
+
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#//////////////////////
+add s9,s9,s8 #tussenres+mul result
+addi a4,a4,4 #volgend adress opslaan
+sw s9,0(a4) #result opslaan
+sub s6,s6,t5 #index i to start
+addi s9, zero, 0
+addi s8, zero, 0
+
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
+#-----------------------
+lw t0,0(s6)  #i
+lw t1,0(s7)  #W
+add s9,s9,s8 #tussenres+mul result
+addi s6,s6,4 #index i +4
+
+mul s8,t0,t1 #result mul
+addi s7,s7,4 #index w +4
+addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 addi a4,a4,4 #volgend adress opslaan
