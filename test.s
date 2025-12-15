@@ -1,18 +1,103 @@
-start:
-    addi s1,zero,1
-    addi s2,zero,2
-    addi s3,zero,3
-    addi s4,zero,4
+.data
+#Matrix O = Matrix I * Matrix W
+W: .word 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1       # 5x3 matrix
+I: .word 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 # 4x5 matrix
 
-    addi t1,zero,15
-    sw 
+.text
+#TODO mult terug maken
+##this instruction can be left out for our hardware version!
 
-    addi t1,s4,4
-    sw t1,0(s1)
+la a0, W #adress W
+la a1, I #adress I
 
-    addi t1,zero,4
-    sw s1,0(t1)
+###this section starts by filling the I and W matrices. 
 
-    add zero,zero,zero
-    lw t1,0(t1)
-    beq t1,s1,start
+addi sp,a0, 0 #start stack in mem
+
+addi s2, zero, 20 #length I
+addi s3, zero, 15 #length W
+
+addi s4, zero, 5 #rows W
+addi s5, zero, 3 #collums W
+
+addi t2, zero, 2 #cnst 2
+
+
+sll t3, s2, t2 #length * 4
+add a4, a1, t3 #eind adress I
+add a2,a4,zero #a2=a4=begin w'
+
+sll t4, s5, t2 #aantal collums *4
+sll t5, s4, t2 #aantal rows *4
+
+mem_loop:
+    add sp, a0, s6 #sp adress + index i
+    addi s7, zero, 0 #reset index j
+    mini_loop:
+        lw t3, 0(sp) #laad eerste matrix waarde in
+        sw t3, 0(a4) #sla op
+        add sp, sp, t4 #stack +4
+        addi a4, a4, 4
+        addi s7, s7, 4
+        bne t5, s7, mini_loop
+    addi s6, s6, 4
+    bne t4, s6, mem_loop
+
+
+##matrix multiply
+
+
+#### Program starts!! 
+addi s11, zero, 1  ##program start          
+
+#TODO : onze code start hier
+
+mul a5,t4,t5 #size w
+la s6, I
+addi s7, a2,0
+addi a6,t5,0 #a6=t5
+srl a5,a5,t2 # /4
+addi s1,a5,0
+add a6,a6,s6 # eindaddres i loop
+add a5,a5,s7 #eindaddres w loop
+
+addi s9, zero, 0
+addi s8, zero, 0
+
+add s6, s6, t5
+
+forforloop:
+    sub s6,s6,t5 #index i to start
+
+forloop:
+    #-----------------------
+    lw t0,0(s6)  #i
+    lw t1,0(s7)  #W
+    add s9,s9,s8 #tussenres+mul result
+    addi s6,s6,4 #index i +4
+
+    mul s8,t0,t1 #result mul
+    addi s7,s7,4 #index w +4
+    
+    bne a6,s6,forloop #zolang niet door 1 rij I loopen(t5=4*widthI)
+    ##else
+
+    #//////////////////////
+    add s9,s9,s8 #tussenres+mul result
+    addi a4,a4,4 #volgend adress opslaan
+    sw s9,0(a4) #result opslaan
+    
+    addi s9, zero, 0
+    addi s8, zero, 0
+    bne s7,a5,forforloop #zolang w< size w loop
+    
+    #######################
+    sub s7,s7,s1 #reset w
+    add a6,a6,t5 # eindaddres i loop
+    bne s6,a2, forloop #zolang index i =! 
+
+
+exit:
+addi a0, zero, 10
+ecall
+
