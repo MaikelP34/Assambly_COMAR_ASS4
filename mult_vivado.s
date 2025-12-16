@@ -1,13 +1,11 @@
 addi zero,zero,0
 addi t1,zero,15
 sw t1,0(sp) #15
-addi sp,sp,4
 addi t1,t1,-1
-sw t1,0(sp) #14
-addi sp,sp,4
+sw t1,4(sp) #14
 addi t1,t1,-1
-sw t1,0(sp) #13
-addi sp,sp,4
+sw t1,8(sp) #13
+addi sp,sp,12
 addi t1,t1,-1
 sw t1,0(sp) #12
 addi sp,sp,4
