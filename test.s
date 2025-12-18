@@ -1,3 +1,4 @@
+#377 cycles in vivada
 addi zero,zero,0
 addi t1,zero,15
 sw t1,0(sp) #15
@@ -238,6 +239,7 @@ mem_loop:
         #bne t5, s7, mini_loop
         addi s6, s6, 4
     #bne t4, s6, mem_loop
+    addi s11,zero,1
 
 #begin mult
 mult:
@@ -662,7 +664,6 @@ add s9,s9,s8 #tussenres+mul result
 #addi s6,s6,4 #index i +4
 addi zero, zero, 0
 mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
  
 #-----------------------
 lw t0,48(s6)  #i
@@ -671,7 +672,7 @@ add s9,s9,s8 #tussenres+mul result
 #addi s6,s6,4 #index i +4
 addi zero, zero, 0
 mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
+#addi s7,s7,4 #index w +4
  
 #-----------------------
 lw t0,52(s6)  #i
@@ -690,13 +691,13 @@ add s9,s9,s8 #tussenres+mul result
 addi zero, zero, 0
 mul s8,t0,t1 #result mul
 #addi s7,s7,4 #index w +4
- addi zero, zero, 0
+addi zero, zero, 0
 addi zero, zero, 0
 #//////////////////////
 add s9,s9,s8 #tussenres+mul result
 #addi a4,a4,4 #volgend adress opslaan
 
-sw s9,28(a4) #result opslaan
+sw s9,28(a4) #result opslaan --gaat misssss
 #sub s6,s6,t5 #index i to start
 addi s9, zero, 0
 addi s8, zero, 0
@@ -853,10 +854,10 @@ mul s8,t0,t1 #result mul
 lw t0,76(s6)  #i
 lw t1,36(s7)  #W
 add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
+#addi s6,s6,4 #index i +4
 addi zero, zero, 0
 mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
+#addi s7,s7,4 #index w +4
  addi zero, zero, 0
 addi zero, zero, 0
 #//////////////////////
@@ -908,10 +909,10 @@ mul s8,t0,t1 #result mul
 lw t0,76(s6)  #i
 lw t1,56(s7)  #W
 add s9,s9,s8 #tussenres+mul result
-addi s6,s6,4 #index i +4
 addi zero, zero, 0
+
 mul s8,t0,t1 #result mul
-addi s7,s7,4 #index w +4
+#addi s7,s7,4 #index w +4
  addi zero, zero, 0
 addi zero, zero, 0
 #//////////////////////
@@ -919,12 +920,10 @@ add s9,s9,s8 #tussenres+mul result
 #addi a4,a4,4 #volgend adress opslaan
 
 sw s9,44(a4) #result opslaan
-#sub s6,s6,t5 #index i to start
-addi s9, zero, 0
-addi s8, zero, 0
+
 
 #######################
-
+    addi s11,zero,0
 #ecall to end program
 exit:
 addi a0, zero, 10
