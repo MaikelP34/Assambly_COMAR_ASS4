@@ -45,47 +45,12 @@ mem_loop:
 
 
 ##matrix multiply
-## set all registers!
 
-####### we don't need to have the next three lines in our HW version!!
 
 #### Program starts!! 
 addi s11, zero, 1  ##program start          
 
 #TODO : onze code start hier
-##### START COUNTING CYCLES FROM HERE (in HW version!!!)
-### as long as s11 = high!
-## INSERT YOUR OWN CODE HERE!
-## Do not change the code above!
-
-#inladen Matrix I in stack
-
-#int I[4][5]; int W[5][3]; int O[4][3];
-#I: .word 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 # horizontaal opgeslagen
-#W: .word 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 # verticaal opgeslagen
-
-# free registers: a2, a3, a4, a5, a6, a7, s2, s3, s10, t3, t4, t5
-# a2 : adress I[b][c]
-# a3 : adress W[c][k]
-# a4 :
-# a5 :
-# a6 : 
-# a7 : 
-# s2 : 
-# s3 : 
-# s10 : 
-# t3 : mul input 1
-# t4 : mul input 2
-# t5 : mul result
-
-# formula for adress in matrix based on Colomns and Rows: 
-# adress = ((row_index * number_of_columns) + column_index) * 4 --> relative to base adress
-
-
-#TODO variables to 0 for safety?
-
-#ecall to end program
-
 
 mul a5,t4,t5 #size w
 la s6, I
@@ -99,6 +64,7 @@ add a5,a5,s7 #eindaddres w loop
 addi s9, zero, 0
 addi s8, zero, 0
 
+
 forloop:
     #-----------------------
     lw t0,0(s6)  #i
@@ -108,7 +74,7 @@ forloop:
 
     mul s8,t0,t1 #result mul
     addi s7,s7,4 #index w +4
-    addi zero, zero, 0
+    
     bne a6,s6,forloop #zolang niet door 1 rij I loopen(t5=4*widthI)
     ##else
 
@@ -129,7 +95,5 @@ forloop:
 
 
 exit:
-addi zero,zero,0
-j exit
-
-
+addi a0, zero, 10
+ecall
